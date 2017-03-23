@@ -10,7 +10,7 @@
 	<artifactId>spring-boot-mybatis</artifactId>
 	<packaging>war</packaging>
 	<name>springboot mybatis实例</name>
-
+	
 	<properties>
 		<mybatis-version>1.1.1</mybatis-version>
 	</properties>
@@ -35,7 +35,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 	</dependencies>
-
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -63,16 +63,6 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<url>http://localhost:8180</url>
-					<username>shichao</username>
-					<password>shichao</password>
-				</configuration>
-			</plugin>
 		</plugins>
 		<resources>
 			<resource>
@@ -85,5 +75,5 @@
 			</resource>
 		</resources>
 	</build>
-
+	
 </project>
