@@ -3,6 +3,8 @@ package com.spring;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.web.SpringBootServletInitializer;
 
 /**
  * ClassName:Application <br/>
@@ -29,10 +31,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 //mybatis mapper 扫描
 @MapperScan({ "com.spring.mybatis.dao" })
-public class Application {
+public class Application extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
+	}
+
+	@Override
+	protected SpringApplicationBuilder configure(
+			SpringApplicationBuilder builder) {
+		return builder.sources(Application.class);
 	}
 
 }
