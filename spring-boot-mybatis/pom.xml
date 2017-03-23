@@ -10,7 +10,7 @@
 	<artifactId>spring-boot-mybatis</artifactId>
 	<packaging>war</packaging>
 	<name>springboot mybatis实例</name>
-	
+
 	<properties>
 		<mybatis-version>1.1.1</mybatis-version>
 	</properties>
@@ -35,7 +35,7 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 	</dependencies>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -63,6 +63,32 @@
 					<skip>true</skip>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.2.3</version>
+				<configuration>
+					<container>
+						<!-- 指明使用的tomcat服务器版本 -->
+						<containerId>tomcat7x</containerId>
+						<type>remote</type>
+					</container>
+					<configuration>
+						<type>runtime</type>
+						<cargo.remote.username>shichao</cargo.remote.username>
+						<cargo.remote.password>shichao</cargo.remote.password>
+						<cargo.tomcat.manager.url>http://192.168.226.81:8088</cargo.tomcat.manager.url>
+					</configuration>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>deploy</phase>
+						<goals>
+							<goal>redeploy</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 		<resources>
 			<resource>
@@ -75,5 +101,5 @@
 			</resource>
 		</resources>
 	</build>
-	
+
 </project>
