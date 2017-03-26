@@ -62,7 +62,7 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
-					<warName>spring-boot-mybatis</warName>
+					<warName>spring-boot-mybatis-${profiles.active}</warName>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>

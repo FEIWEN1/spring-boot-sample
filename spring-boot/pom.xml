@@ -18,10 +18,34 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<modules>
 		<module>../spring-boot-mybatis</module>
 		<module>../spring-boot-mail</module>
 	</modules>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<profiles.active>dev</profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<profiles.active>test</profiles.active>
+			</properties>
+		</profile>
+		<profile>
+			<id>run</id>
+			<properties>
+				<profiles.active>run</profiles.active>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>
