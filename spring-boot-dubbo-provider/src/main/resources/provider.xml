@@ -6,6 +6,8 @@
 	 	http://code.alibabatech.com/schema/dubbo    http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
 	<dubbo:application name="dubbo-provider" />
+	<!--dubbo 监控中心配置-->
+	<dubbo:monitor protocol="registry" />
 	
 	<beans>
 		<dubbo:registry protocol="zookeeper" address="192.168.226.81:2181" />
