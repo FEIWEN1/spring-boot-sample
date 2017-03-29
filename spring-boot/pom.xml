@@ -6,6 +6,10 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>springboot 实例</name>
+	
+	<properties>
+		<dubbo-version>1.0.0-SNAPSHOT</dubbo-version>
+	</properties>
 
 	<dependencyManagement>
 		<dependencies>
@@ -22,6 +26,9 @@
 	<modules>
 		<module>../spring-boot-mybatis</module>
 		<module>../spring-boot-mail</module>
+		<module>../spring-boot-dubbo-api</module>
+		<module>../spring-boot-dubbo-provider</module>
+		<module>../spring-boot-dubbo-consumer</module>
 	</modules>
 
 	<profiles>
