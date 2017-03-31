@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * ClassName:FeignConsumerService <br/>
  * Title:
  * <p>
- * 使用@FeignClient("spring-cloud-eureka-provider")注解来绑定该接口对应服务 
+ * 使用@FeignClient("spring-cloud-eureka-provider")注解来绑定该接口对应服务
  * 通过SpringMVC的注解来配置spring-cloud-eureka-provider服务下的具体实现
  * </p>
  * <br/>
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @version
  * 
  */
-@FeignClient("spring-cloud-eureka-provider")
+@FeignClient(value = "spring-cloud-eureka-provider", fallback = FeignClientHystrix.class)
 public interface FeignConsumerService {
 
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)

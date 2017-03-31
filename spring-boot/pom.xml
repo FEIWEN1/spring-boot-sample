@@ -34,6 +34,7 @@
 		<module>../spring-boot-cloud-eureka-provider</module>
 		<module>../spring-boot-cloud-eureka-consumer</module>
 		<module>../spring-boot-cloud-eureka-consumer-feign</module>
+		<module>../spring-boot-cloud-eureka-consumer-hystrix</module>
 	</modules>
 
 	<profiles>
