@@ -30,6 +30,10 @@
 		<module>../spring-boot-dubbo-provider</module>
 		<module>../spring-boot-dubbo-consumer</module>
 		<module>../spring-boot-security</module>
+		<module>../spring-boot-cloud-eureka-server</module>
+		<module>../spring-boot-cloud-eureka-provider</module>
+		<module>../spring-boot-cloud-eureka-consumer</module>
+		<module>../spring-boot-cloud-eureka-consumer-feign</module>
 	</modules>
 
 	<profiles>
