@@ -5,6 +5,7 @@
 		<groupId>com.spring</groupId>
 		<artifactId>spring-boot</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../spring-boot/pom.xml</relativePath>
 	</parent>
 	<artifactId>spring-boot-dubbo-api</artifactId>
 	<name>springboot dubbo接口提供</name>

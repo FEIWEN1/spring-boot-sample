@@ -5,22 +5,20 @@
 		<groupId>com.spring</groupId>
 		<artifactId>spring-boot</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../spring-boot/pom.xml</relativePath>
 	</parent>
 	<artifactId>spring-boot-cloud-gateway</artifactId>
 	<name>springboot cloud 服务网关</name>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-zuul</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
-
 	</dependencies>
 
 	<dependencyManagement>
@@ -34,5 +32,26 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>1.3.7.RELEASE</version>
+				<configuration>
+					<executable>true</executable>
+					<finalName>spring-boot-cloud-gateway-${profiles.active}</finalName>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
