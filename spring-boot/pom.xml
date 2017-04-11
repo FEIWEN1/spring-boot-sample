@@ -6,7 +6,7 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>springboot 实例</name>
-	
+
 	<properties>
 		<dubbo-version>1.0.0-SNAPSHOT</dubbo-version>
 	</properties>
@@ -30,6 +30,7 @@
 		<module>../spring-boot-dubbo-provider</module>
 		<module>../spring-boot-dubbo-consumer</module>
 		<module>../spring-boot-security</module>
+		<module>../spring-boot-rabbitmq</module>
 		<module>../spring-boot-cloud-eureka-server</module>
 		<module>../spring-boot-cloud-eureka-provider</module>
 		<module>../spring-boot-cloud-eureka-consumer</module>
@@ -37,6 +38,7 @@
 		<module>../spring-boot-cloud-eureka-consumer-hystrix</module>
 		<module>../spring-boot-cloud-config-server</module>
 		<module>../spring-boot-cloud-config-client</module>
+		<module>../spring-boot-cloud-gateway</module>
 	</modules>
 
 	<profiles>
@@ -62,5 +64,53 @@
 			</properties>
 		</profile>
 	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.vm</include>
+					<include>**/*.properties</include>
+					<include>**/*.xml</include>
+					<include>**/*.html</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
 
 </project>
