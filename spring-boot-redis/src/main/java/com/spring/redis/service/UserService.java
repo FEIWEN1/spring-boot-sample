@@ -2,8 +2,13 @@ package com.spring.redis.service;
 
 import java.util.Set;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 
+import com.spring.redis.annotation.UserCache;
 import com.spring.redis.bean.User;
 
 /**
@@ -190,5 +195,85 @@ public interface UserService {
 	 * @param user
 	 */
 	void publish(String channel, Object user);
+
+	/**
+	 * 
+	 * @Title:<p>keyGenerator设置存储key</p><br/>
+	 * @author shichao
+	 * @param user
+	 * @return
+	 */
+	@CachePut(keyGenerator = "redisKeyGenerator", value = "user")
+	User getUser(User user);
+
+	/**
+	 * 
+	 * @Title:<p>先查缓存，如果没有再调用方法获取数据，然后把数据添加到缓存中</p><br/>
+	 * @author shichao
+	 * @param username
+	 * @return
+	 */
+	@Cacheable(key = "#username", value = "user")
+	User getUserByUsername(String username);
+
+	/**
+	 * 
+	 * @Title:<p>先查缓存，如果没有再调用方法获取数据，然后把数据添加到缓存中</p><br/>
+	 * @author shichao
+	 * @param username
+	 * @return
+	 */
+	@Cacheable(key = "#mobile", value = "user")
+	User getUserByMobile(String mobile);
+
+	/**
+	 * 
+	 * @Title:<p>保存数据时往缓存中写 </p><br/>
+	 * @author shichao
+	 * @param user
+	 * @return
+	 */
+	@Caching(put = { @CachePut(value = "user", key = "#user.mobile"),
+			@CachePut(value = "user", key = "#user.username") })
+	User saveCacheUser(User user);
+
+	/**
+	 * 
+	 * @Title:<p>自定义缓存注解</p><br/>
+	 * @author shichao
+	 * @param user
+	 * @return
+	 */
+	@UserCache
+	User updateCacheUser(User user);
+
+	/**
+	 * 
+	 * @Title:<p>条件缓存</p><br/>
+	 * @author shichao
+	 * @param user
+	 * @return
+	 */
+	@CachePut(value = "user", key = "#user.username", condition = "#id lt 1")
+	User saveCacheUserCondition(User user);
+
+	/**
+	 * 
+	 * @Title:<p>移除缓存</p><br/>
+	 * @author shichao
+	 * @param user
+	 */
+	@CacheEvict(value = "user", key = "#user.username")
+	void deleteUserByUsername(User user);
+
+	/**
+	 * 
+	 * @Title:<p>allEntries是否移除所有数据,beforeInvocation是调用方法之前移除(true)/还是调用之后移除(false)</p><br/>
+	 * @author shichao
+	 */
+	@CacheEvict(value = "user", allEntries = true, beforeInvocation = true)
+	void deleteAllUser();
+
+	void callBackRedisException(User user) throws Exception;
 
 }

@@ -20,6 +20,10 @@ import java.util.Date;
 public class User implements Serializable {
 
 	/**
+	 * 主键id
+	 */
+	private Long id;
+	/**
 	 * 用户名
 	 */
 	private String username;
@@ -31,6 +35,14 @@ public class User implements Serializable {
 	 * 创建时间
 	 */
 	private Date createTime;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return username;

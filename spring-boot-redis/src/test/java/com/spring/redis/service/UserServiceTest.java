@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -33,6 +34,9 @@ public class UserServiceTest {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private StringRedisTemplate stringRedisTemplate;
 
 	@Test
 	public void save() {
@@ -182,6 +186,85 @@ public class UserServiceTest {
 		user.setCreateTime(new Date());
 		userService.publish("publish", user);
 		userService.publish("String", "字符串测试");
+	}
+
+	@Test
+	public void getUserByUsername() {
+		String username = "saveCacheUser";
+		User user = userService.getUserByUsername(username);
+		Assert.assertNotNull(user);
+	}
+
+	@Test
+	public void getUserByMobile() {
+		String mobile = "15011111111";
+		User user = userService.getUserByMobile(mobile);
+		Assert.assertNotNull(user);
+	}
+
+	@Test
+	public void saveCacheUser() {
+		User user = new User();
+		user.setUsername("saveCacheUser");
+		user.setMobile("15011111111");
+		user.setCreateTime(new Date());
+		userService.saveCacheUser(user);
+	}
+
+	@Test
+	public void updateCacheUser() {
+		User user = new User();
+		user.setUsername("updateCacheUser");
+		user.setMobile("18022222111");
+		user.setCreateTime(new Date());
+		userService.updateCacheUser(user);
+	}
+
+	@Test
+	public void saveCacheUserCondition() {
+		User user = new User();
+		user.setUsername("saveCacheUserCondition");
+		user.setMobile("18234422111");
+		user.setCreateTime(new Date());
+		userService.saveCacheUserCondition(user);
+	}
+
+	@Test
+	public void deleteUserByUsername() {
+		User user = new User();
+		user.setUsername("saveCacheUserCondition");
+		user.setMobile("18234422111");
+		user.setCreateTime(new Date());
+		userService.saveCacheUser(user);
+		userService.deleteUserByUsername(user);
+	}
+
+	@Test
+	public void deleteAllUser() {
+		userService.deleteAllUser();
+	}
+
+	@Test
+	public void saveString() {
+		stringRedisTemplate.boundValueOps("fffffff").set("123456");
+	}
+
+	@Test
+	public void getUser() {
+		User user = new User();
+		user.setUsername("getUser");
+		user.setMobile("66666666666");
+		user.setCreateTime(new Date());
+		userService.getUser(user);
+	}
+
+	@Test(expected = Exception.class)
+	public void callBackRedisException() throws Exception {
+		User user = new User();
+		user.setUsername("callBackRedisException");
+		user.setMobile("66666666666");
+		user.setCreateTime(new Date());
+		userService.callBackRedisException(user);
 	}
 
 }

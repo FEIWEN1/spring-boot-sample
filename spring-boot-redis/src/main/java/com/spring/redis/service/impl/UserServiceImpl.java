@@ -1,5 +1,6 @@
 package com.spring.redis.service.impl;
 
+import java.util.Date;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations.TypedTuple;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import com.spring.redis.bean.User;
@@ -126,6 +128,61 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void publish(String channel, Object user) {
 		redisTemplate.convertAndSend(channel, user);
+	}
+
+	@Override
+	public User getUserByUsername(String username) {
+		User user = new User();
+		user.setUsername("getUserByUsername");
+		user.setMobile("1234567890");
+		user.setCreateTime(new Date());
+		return user;
+	}
+
+	@Override
+	public User getUserByMobile(String mobile) {
+		User user = new User();
+		user.setUsername("getUserByMobile");
+		user.setMobile("6789012345");
+		user.setCreateTime(new Date());
+		return user;
+	}
+
+	@Override
+	public User saveCacheUser(User user) {
+		return user;
+	}
+
+	@Override
+	public User updateCacheUser(User user) {
+		return user;
+	}
+
+	@Override
+	public User saveCacheUserCondition(User user) {
+		return user;
+	}
+
+	@Override
+	public void deleteUserByUsername(User user) {
+		return;
+	}
+
+	@Override
+	public void deleteAllUser() {
+		return;
+	}
+
+	@Override
+	public User getUser(User user) {
+		return user;
+	}
+
+	@Override
+	@Transactional(rollbackFor = Exception.class)
+	public void callBackRedisException(User user) throws Exception {
+		redisTemplate.boundValueOps(user.getUsername()).set(user);
+		throw new Exception("redis error msg");
 	}
 
 }
