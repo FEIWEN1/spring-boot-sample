@@ -20,6 +20,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
  *	prefixOverrides：前缀判断的条件
  *	suffixOverrides：后缀判断的条件
  *	 -->
+ * mybatis There is no getter for property named 'xxxx' 检查参数
  * </p>
  * <br/>
  * Date: 2017年3月20日 下午2:39:15 <br/>
@@ -30,7 +31,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
  */
 @SpringBootApplication
 //mybatis mapper 扫描
-@MapperScan({ "com.spring.mybatis.dao" })
+@MapperScan({ "com.spring.*.dao" })
 public class Application extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {

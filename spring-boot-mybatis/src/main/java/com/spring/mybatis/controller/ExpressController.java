@@ -3,6 +3,7 @@ package com.spring.mybatis.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,9 +32,12 @@ public class ExpressController {
 	@Autowired
 	private ExpressService expressService;
 
+	@Value("${config.username}")
+	private String username;
+
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test() {
-		return "hello express";
+		return "****express234" + username;
 	}
 	
 	@RequestMapping(value = "/getExpressCompanies", method = RequestMethod.GET)
