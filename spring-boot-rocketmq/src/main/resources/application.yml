@@ -1,0 +1,51 @@
+#rocketmq settings
+rocketmq:
+  namesrv-addr: 127.0.0.1:9876
+  topicMap:
+    simple:
+      sleepTime: 2000
+      topicInfos:
+        simpleTopic:
+          tags: tagS
+    order:
+      sleepTime: 2000
+      topicInfos:
+        orderTopic:
+          tags: tagO
+          retryNum: 5
+#    transaction:
+#      topicInfos:
+#        transactionTopic:
+#          tags: tagT
+
+#server settings
+server:
+  port: 7000
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF-8&relaxAutoCommit=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: root
+    password: shichao
+    # 初始化大小，最小，最大
+    initial-size: 3
+    min-idle: 3
+    max-active: 10
+    # 配置获取连接等待超时的时间
+    max-wait: 10000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    time-between-eviction-runs-millis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    min-evictable-idle-time-millis: 300000
+    test-while-idle: true
+    validation-query: select 1
+    driver-class-name: com.mysql.jdbc.Driver
+    test-on-borrow: true
+    test-on-return: false
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    #filters: stat,wall,log4j
+    # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    #connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    # 合并多个DruidDataSource的监控数据
+    #useGlobalDataSourceStat: true
